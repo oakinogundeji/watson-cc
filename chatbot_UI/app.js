@@ -50,6 +50,21 @@ app.get('/test', (req, res) => {
   return res.status(200).
     send('<marquee><h1>Yaaaay... it works!!!</h1></marquee>');
 });
+
+app.get('/', (req, res) => {
+    const options = {
+        root: __dirname,
+        dotfiles: 'deny'
+    };
+    return res.sendFile('index.html', options, err => {
+        if(err) {
+            console.error(`Couldn't send index.html`);
+            return res.status(500).json({error: err});
+        } else {
+            return console.log('Index.html sent');
+        }
+    });
+});
 //=============================================================================
 /**
  * bind server to port
