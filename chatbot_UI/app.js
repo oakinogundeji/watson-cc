@@ -44,6 +44,8 @@ const ChatBot = new ConversationV1({
   },
   version_date: VERSION_DATE
 });
+
+let chatContext;
 //=============================================================================
 /**
  * helper functions
@@ -56,11 +58,17 @@ function talkToBot(data) {
   if(!data) {
     user_input = {};
   } else {
+    console.log(`input data: ${data.trim()}`);
     user_input = {
       input: {
         text: data.trim()
       }
     };
+    if(chatContext) {
+      console.log('existing context');
+      console.log(chatContext);
+      user_input.context = chatContext;
+    }
   }
   return new Promise((resolve, reject) => {
     return ChatBot.message(user_input, (err, resp) => {
@@ -84,6 +92,7 @@ function talkToBot(data) {
         console.log(resp);
         console.log('\n');
         console.log(resp.output.text[0] +' ...');
+        chatContext = resp.context;
         return resolve(resp.output.text[0]);
       }
     });
@@ -124,6 +133,15 @@ app.get('/', (req, res) => {
 
 app.get('/welcome', (req, res) => {
   return talkToBot(null)
+    .then(data => res.status(200).json({data: data}))
+    .catch(err => res.status(500).json({err: err}));
+});
+
+app.post('/userInput', (req, res) => {
+  const userInputData = req.body.data.input;
+  console.log('data from user...');
+  console.log(userInputData);
+  return talkToBot(userInputData)
     .then(data => res.status(200).json({data: data}))
     .catch(err => res.status(500).json({err: err}));
 });

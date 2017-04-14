@@ -44,7 +44,7 @@
     <main id="app" class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <form>
+          <form @submit.prevent.stop="sendUserInput">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">ChatBot says...</h3>
@@ -60,12 +60,9 @@
               <label for="user-input">Your input:</label>
               <input type="text" id="user-input" class="form-control" v-model="userInput">
             </div>
-            <button type="button" class="btn btn-primary btn-default pull-right">Go!</button>
+            <button type="button" class="btn btn-primary btn-default pull-right" @click.stop.prevent="sendUserInput">Go!</button>
           </form>
         </div>
-      </div>
-      <div>
-        <pre>{{$data}}</pre>
       </div>
     </main>
     <script src="js/main.js"></script>
