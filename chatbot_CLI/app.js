@@ -8,7 +8,9 @@ if(process.env.NODE_ENV != 'production') {
  * dependencies
  */
 //=============================================================================
-const ConversationV1 = require('watson-developer-cloud/conversation/v1');
+const
+  ConversationV1 = require('watson-developer-cloud/conversation/v1'),
+  prompt = require('prompt');
 //=============================================================================
 /**
  * module variables
@@ -42,10 +44,26 @@ function responseHandler(err, resp) {
     });
   }
   if(resp.output.text.length != 0) {
-    console.log(`response from Watson convo:`);
     console.log(resp);
-    console.log(resp.output.text[0]);
+    console.log('\n');
+    console.log(resp.output.text[0] +' ...');
   }
+  prompt.get(['user_input'], (err, ans) => {
+    if(err) {
+      return console.error(err);
+    }
+    if(ans.user_input.trim() == 'done') {
+      console.log("It's been a pleasure to serve you... i'm done for now!");
+      process.exit(0);
+    } else {
+      return ChatBot.message({
+        input: {
+          text: ans.user_input.trim()
+        },
+        context: resp.context
+      }, responseHandler);
+    }
+  });
 }
 //=============================================================================
 /**
@@ -66,4 +84,5 @@ const ChatBot = new ConversationV1({
  */
 //=============================================================================
 ChatBot.message({}, responseHandler);
+prompt.start();
 //=============================================================================
