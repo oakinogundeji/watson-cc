@@ -40,7 +40,7 @@ if(ENV != 'production') {
 //=============================================================================
 app.use(bParser.json());
 app.use(bParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public/assets')));
+app.use(express.static(path.join(__dirname, 'public')));
 //=============================================================================
 /**
  * routes

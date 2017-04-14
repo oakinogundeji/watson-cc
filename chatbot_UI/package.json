@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "a UI interface to Watson powered Chatbot",
   "main": "app.js",
+  "browser": {
+    "vue": "vue/dist/vue.common"
+  },
   "scripts": {
     "test": "mocha test",
     "build-dev": "watchify -t partialify ./public/js/app.js -o ./public/js/main.js -dv",
