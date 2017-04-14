@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "prompt": "^1.0.0",
-    "prompt-sync": "^4.1.4",
     "watson-developer-cloud": "^2.28.1"
   },
   "devDependencies": {
