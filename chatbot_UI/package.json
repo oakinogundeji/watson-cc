@@ -16,6 +16,7 @@
   "author": "Telios WebDev",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "vue": "^2.2.6",
