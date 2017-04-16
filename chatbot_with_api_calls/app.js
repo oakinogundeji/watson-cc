@@ -54,12 +54,9 @@ let chatContext;
 function executeSearch(item) {
   console.log(`search item: ${item}`);
   return new Promise((resolve, reject) => {
-    function cb(item) {
+    return setTimeout((item) => {
       return resolve(`Search item after 2 secs: ${item}`);
-    }
-    return setTimeout(() => {
-      return cb(item);      
-    }, 2000);
+    }, 2000, item);
   });
 }
 
