@@ -51,6 +51,18 @@ let chatContext;
  * helper functions
  */
 //=============================================================================
+function executeSearch(item) {
+  console.log(`search item: ${item}`);
+  return new Promise((resolve, reject) => {
+    function cb(item) {
+      return resolve(`Search item after 2 secs: ${item}`);
+    }
+    return setTimeout(() => {
+      return cb(item);      
+    }, 2000);
+  });
+}
+
 function talkToBot(data) {
   let
     user_input,
@@ -94,7 +106,8 @@ function talkToBot(data) {
         console.log(resp.output.text[0] +' ...');
         chatContext = resp.context;
         const item = resp.input.text.split(' ').pop();
-        return resolve(`It seems you want: ${item}`);
+        //return resolve(`It seems you want: ${item}`);
+        return resolve(executeSearch(item));
       }
       if(resp.output.text.length != 0) {
         console.log(resp);
