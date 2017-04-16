@@ -52,22 +52,6 @@ const VM = new Vue({
       }
     }
   },
-  /*beforeMount: function () {
-    console.log('before mount fired...');
-    const URL = this.welcomeURL;
-    this.$http.get(URL)
-      .then(data => {
-        this.loadingSpinner = false;
-        console.log('response from backend...');
-        console.log(data);
-        return this.output = data.body.data;
-      })
-      .catch(info => {
-        this.loadingSpinner = false;
-        console.log('yawa gas...');
-        return console.log(info);
-      });
-  },*/
   mounted: function () {
     console.log('mounted fired...');
     const URL = this.welcomeURL;
