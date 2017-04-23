@@ -16,7 +16,7 @@ Vue.http.options.root = '/root';
 const VM = new Vue({
   el: '#app',
   data: {
-    output: '',
+    output: [],
     userInput: '',
     welcomeURL: '/welcome',
     userInputURL: '/userInput',
@@ -38,7 +38,7 @@ const VM = new Vue({
           .then(data => {
             this.loadingSpinner = false;
             console.log('response from backend...');
-            console.log(data);
+            console.log(data.body.data);
             return this.output = data.body.data;
           })
           .catch(info => {
